@@ -1,33 +1,28 @@
 #!/bin/bash
-set -e   # có lỗi thì dừng ngay
+set -e
 
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
 
-echo "=== Qwen0.5B HH ==="
-bash run_all.sh 1 1 4 1
+# ===============================
+# Qwen0.5B
+# ===============================
+CUDA_VISIBLE_DEVICES=3 bash run_all.sh 1 1 4 1 &   # hh
+CUDA_VISIBLE_DEVICES=7 bash run_all.sh 1 2 4 1 &   # shp
+CUDA_VISIBLE_DEVICES=4 bash run_all.sh 1 3 4 1 &   # pku
 
-echo "=== Qwen0.5B SHP ==="
-bash run_all.sh 1 2 4 1
+# ===============================
+# TinyLLaMA 1.1B
+# ===============================
+CUDA_VISIBLE_DEVICES=3 bash run_all.sh 2 1 4 1 &   # hh
+CUDA_VISIBLE_DEVICES=7 bash run_all.sh 2 2 4 1 &   # shp
+CUDA_VISIBLE_DEVICES=4 bash run_all.sh 2 3 4 1 &   # pku
 
-echo "=== Qwen0.5B PKU ==="
-bash run_all.sh 1 3 4 1
+# ===============================
+# Qwen 3B
+# ===============================
+CUDA_VISIBLE_DEVICES=3 bash run_all.sh 3 1 4 1 &   # hh
+CUDA_VISIBLE_DEVICES=7 bash run_all.sh 3 2 4 1 &   # shp
+CUDA_VISIBLE_DEVICES=4 bash run_all.sh 3 3 4 1 &   # pku
 
-echo "=== TinyLLaMA 1.1B HH ==="
-bash run_all.sh 2 1 4 1
-
-echo "=== TinyLLaMA 1.1B SHP ==="
-bash run_all.sh 2 2 4 1
-
-echo "=== TinyLLaMA 1.1B PKU ==="
-bash run_all.sh 2 3 4 1
-
-echo "=== Qwen 3B HH ==="
-bash run_all.sh 3 1 4 1
-
-echo "=== Qwen 3B SHP ==="
-bash run_all.sh 3 2 4 1
-
-echo "=== Qwen 3B PKU ==="
-bash run_all.sh 3 3 4 1
-
-echo "🎉 ALL SFT JOBS FINISHED"
+wait
+echo "🎉 ALL JOBS FINISHED"
