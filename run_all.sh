@@ -109,19 +109,20 @@ fi
 
 #----Causal DPO ---
 echo "🔥 Running $variant_name..."
-python -u train.py \
-    model=$model_name \
-    datasets=[$dataset] \
-    loss=dpo \
-    loss.beta=0.1 \
-    $backdoor_mode \
-    $num_samples \
-    exp_name=${dataset}_${model_name}_${variant_name} \
-    gradient_accumulation_steps=2 \
-    batch_size=$batch_size \
-    eval_batch_size=$batch_size \
-    trainer=BasicTrainer \
-    sample_during_eval=false \
-    model.archive=$ckpt_path
-
+if [ "$run_sft" = "1" ]; then
+    python -u train.py \
+        model=$model_name \
+        datasets=[$dataset] \
+        loss=dpo \
+        loss.beta=0.1 \
+        $backdoor_mode \
+        $num_samples \
+        exp_name=${dataset}_${model_name}_${variant_name} \
+        gradient_accumulation_steps=2 \
+        batch_size=$batch_size \
+        eval_batch_size=$batch_size \
+        trainer=BasicTrainer \
+        sample_during_eval=false \
+        model.archive=$ckpt_path
+fi
 echo "✅ Done: $variant_name on $dataset"
