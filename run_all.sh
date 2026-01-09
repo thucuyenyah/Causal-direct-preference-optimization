@@ -73,7 +73,7 @@ if [ "$run_sft" = "1" ]; then
         $backdoor_mode \
         n_examples=100 \
         $num_samples \
-        exp_name=${dataset}_${model_name}_${variant_name}_sft \
+        exp_name=${dataset}_${model_name}_sft \
         gradient_accumulation_steps=2 \
         batch_size=$batch_size \
         eval_batch_size=$batch_size \
@@ -81,25 +81,25 @@ if [ "$run_sft" = "1" ]; then
         sample_during_eval=false
 fi
 
-# ===============================
-# Load checkpoint
-# ===============================
-BASE_DIR=".cache/thinng"
-PREFIX="${dataset}_${model_name}_${variant_name}_sft"
-
-latest_suffix=$(find "$BASE_DIR" -maxdepth 1 -type d -name "${PREFIX}*" | sort | tail -n 1)
-
-ckpt_path="$latest_suffix/LATEST/policy.pt"
-
-if [ ! -f "$ckpt_path" ]; then
-    echo "❌ Checkpoint not found"
-    exit 1
-fi
 
 # ===============================
 # DPO
 # ===============================
 if [ "$run_sft" = "0" ]; then
+    # ===============================
+    # Load checkpoint
+    # ===============================
+    BASE_DIR=".cache/nhdang01"
+    PREFIX="${dataset}_${model_name}_sft"
+
+    latest_suffix=$(find "$BASE_DIR" -maxdepth 1 -type d -name "${PREFIX}*" | sort | tail -n 1)
+
+    ckpt_path="$latest_suffix/LATEST/policy.pt"
+
+    if [ ! -f "$ckpt_path" ]; then
+        echo "❌ Checkpoint not found"
+        exit 1
+    fi
     python -u train.py \
         model=$model_name \
         datasets=[$dataset] \
