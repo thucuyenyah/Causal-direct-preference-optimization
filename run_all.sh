@@ -79,6 +79,7 @@ if [ "$run_sft" = "1" ]; then
         datasets=[$dataset] \
         loss=sft \
         $backdoor_mode \
+        n_examples=100 \
         $num_samples \
         exp_name=${dataset}_${model_name}_${variant_name}_sft \
         gradient_accumulation_steps=2 \
