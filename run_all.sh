@@ -71,7 +71,6 @@ if [ "$run_sft" = "1" ]; then
         datasets=[$dataset] \
         loss=sft \
         $backdoor_mode \
-        n_examples=100 \
         $num_samples \
         exp_name=${dataset}_${model_name}_sft \
         gradient_accumulation_steps=2 \
@@ -107,7 +106,6 @@ if [ "$run_sft" = "0" ]; then
         loss.beta=0.1 \
         $backdoor_mode \
         $num_samples \
-        n_examples=100 \
         exp_name=${dataset}_${model_name}_${variant_name} \
         gradient_accumulation_steps=2 \
         batch_size=$batch_size \
