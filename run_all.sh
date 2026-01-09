@@ -6,7 +6,6 @@
 #SBATCH --mem=128G
 #SBATCH --qos=priority
 #SBATCH --mail-type=END,TIME_LIMIT
-#SBATCH --mail-user=thin.nguyen@deakin.edu.au
 
 
 # --- Environment setup ---
