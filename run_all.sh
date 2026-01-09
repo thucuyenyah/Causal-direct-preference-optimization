@@ -10,9 +10,9 @@
 
 
 # --- Environment setup ---
-module load Anaconda3
-source activate
-conda activate dpoenv
+source /raid/nhdang01/miniconda3/etc/profile.d/conda.sh
+conda activate dpo
+
 export PYTHONNOUSERSITE=1
 export WANDB_API_KEY=8f17474bb5e6fbb39a20e2e78dac373f97f339e6
 
@@ -88,7 +88,6 @@ if [ "$run_sft" = "1" ]; then
         trainer=BasicTrainer \
         sample_during_eval=false 
     echo "✅ Finished SFT. Exiting..."
-    exit 0
 fi
 
 # --- Find the latest SFT checkpoint ---
@@ -110,7 +109,7 @@ fi
 
 #----Causal DPO ---
 echo "🔥 Running $variant_name..."
-if [ "$run_sft" = "1" ]; then
+if [ "$run_sft" = "0" ]; then
     python -u train.py \
         model=$model_name \
         datasets=[$dataset] \
