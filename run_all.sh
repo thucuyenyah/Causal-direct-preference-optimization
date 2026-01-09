@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=gpu-large
-#SBATCH --gpus=h100:1
+#SBATCH --gpus=a100:1
 #SBATCH --cpus-per-gpu=8
 #SBATCH --time=120:00:00
 #SBATCH --mem=128G
