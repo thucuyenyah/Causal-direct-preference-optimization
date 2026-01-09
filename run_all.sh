@@ -107,6 +107,7 @@ if [ "$run_sft" = "0" ]; then
         loss.beta=0.1 \
         $backdoor_mode \
         $num_samples \
+        n_examples=100 \
         exp_name=${dataset}_${model_name}_${variant_name} \
         gradient_accumulation_steps=2 \
         batch_size=$batch_size \
