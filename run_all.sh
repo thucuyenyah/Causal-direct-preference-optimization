@@ -17,7 +17,7 @@ model_name_idx=$1
 dataset_idx=$2
 variant=$3
 run_sft=$4
-batch_size=4
+batch_size=8
 
 if [ -z "$variant" ] || [ -z "$dataset_idx" ]; then
     echo "❌ Usage: bash run_all_axis.sh <model_idx> <dataset_idx> <variant> <run_sft>"
@@ -55,8 +55,8 @@ log_dir="logs"
 mkdir -p "$log_dir"
 RUN_ID=$(date +%Y%m%d_%H%M%S)
 
-log_file="${log_dir}/${model_name}_${dataset}_${variant_name}_${RUN_ID}.out"
-err_file="${log_dir}/${model_name}_${dataset}_${variant_name}_${RUN_ID}.err"
+log_file="${log_dir}/${model_name}_${dataset}_${variant_name}_${run_sft}_${RUN_ID}.out"
+err_file="${log_dir}/${model_name}_${dataset}_${variant_name}_${run_sft}_${RUN_ID}.err"
 
 exec > >(tee "$log_file") 2> >(tee "$err_file" >&2)
 
