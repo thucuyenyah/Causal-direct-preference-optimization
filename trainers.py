@@ -633,10 +633,10 @@ class BasicTrainer(object):
                 except Exception:
                     token_name = f"<id:{adj_ids}>"
 
-                print("=== DEBUG ORIGINAL PROMPT (raw decode) ===")
-                print(self.tokenizer.decode(batch['prompt_input_ids'][0], skip_special_tokens=False))
-                print("=== DEBUG WITH ADJ (raw decode) ===")
-                print(self.tokenizer.decode(adj_batch['prompt_input_ids'][0], skip_special_tokens=False))
+                # print("=== DEBUG ORIGINAL PROMPT (raw decode) ===")
+                # print(self.tokenizer.decode(batch['prompt_input_ids'][0], skip_special_tokens=False))
+                # print("=== DEBUG WITH ADJ (raw decode) ===")
+                # print(self.tokenizer.decode(adj_batch['prompt_input_ids'][0], skip_special_tokens=False))
                 print(f"[DEBUG] inserted adj token: id={adj_ids}, name={token_name}")
 
 
